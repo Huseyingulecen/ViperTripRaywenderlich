@@ -26,16 +26,16 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import Foundation
 import SwiftUI
 
-struct TripDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct TripDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        TripDetailView()
-    }
+class TripListRouter {
+  func makeDetailView(for trip: Trip, model: DataModel) -> some View {
+    let presenter = TripDetailPresenter(interactor:
+      TripDetailInteractor(
+        trip: trip,
+        model: model,
+        mapInfoProvider: RealMapDataProvider()))
+    return TripDetailView(presenter: presenter)
+  }
 }
